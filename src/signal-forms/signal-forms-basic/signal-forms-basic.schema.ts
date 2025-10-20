@@ -1,6 +1,7 @@
 import {
   applyWhen,
   customError,
+  disabled,
   email,
   minLength,
   required,
@@ -24,6 +25,9 @@ export const userFormSchema = schema<UserForm>((path) => {
   required(path.zipCode);
 
   required(path.mood);
+  disabled(path.message, (ctx) =>
+    ["🤬", "😐", "😠"].includes(ctx.valueOf(path.mood)),
+  );
 
   applyWhen(
     path,
