@@ -18,45 +18,21 @@ export class SignalFormsBasicComponent {
       name: "",
       email: "",
       message: "",
-      country: "",
+      country: "CH",
       zipCode: "",
     }),
-    userFormSchema
+    userFormSchema,
   );
-
-  private previousCountryErrors = signal<any>(null);
 
   showZipcodeErrors = computed(() => {
     const hasCountry = !!this.userForm.country().value();
-    const zipcodeErrors = this.userForm.zipCode().errors();
+    const zipcodeErrors = this.userForm.zipCode().errors().length > 0;
     return hasCountry && zipcodeErrors;
   });
 
-  // Single computed signal for all form errors
-  protected readonly formErrors = computed(() => {
-    const createFieldErrors = (field: any) => {
-      const errors = field.errors();
-      const errorMap: Record<string, boolean> = {};
-      errors.forEach((e: any) => {
-        errorMap[e.kind] = true;
-      });
-      return {
-        ...errorMap,
-        hasErrors: errors.length > 0,
-        touched: field.touched(),
-      };
-    };
-
-    return {
-      name: createFieldErrors(this.userForm.name()),
-      email: createFieldErrors(this.userForm.email()),
-      message: createFieldErrors(this.userForm.message()),
-    };
-  });
-
   // Submit handler using the submit function
-  onSubmit() {
-    submit(this.userForm, async (value) => {
+  async onSubmit() {
+    await submit(this.userForm, async (value) => {
       console.log("Form submitted with values:", value);
 
       // Simulate API call

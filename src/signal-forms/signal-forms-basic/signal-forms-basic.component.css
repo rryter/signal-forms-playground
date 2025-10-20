@@ -2,7 +2,10 @@
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 h1 {
@@ -44,8 +47,9 @@ textarea:focus {
   border-color: #4a90e2;
 }
 
-input:invalid,
-textarea:invalid,
+/* input:invalid,
+textarea:invalid, */
+/* Currently the ng- classes are not added: https://github.com/angular/angular/pull/64489 */
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border-color: #e74c3c;
