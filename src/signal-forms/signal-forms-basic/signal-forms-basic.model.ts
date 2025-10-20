@@ -1,5 +1,4 @@
-export interface UserForm {
-  name: string;
+export interface FeedbackForm {
   email: string;
   message: string;
   mood: string;

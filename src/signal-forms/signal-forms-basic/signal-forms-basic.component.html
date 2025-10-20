@@ -12,68 +12,68 @@
         <input
           id="email"
           type="email"
-          [field]="userForm.email"
+          [field]="feedbackForm.email"
           placeholder="Enter your email"
         />
-        <app-field-error [fieldState]="userForm.email()" />
+        <app-field-error [fieldState]="feedbackForm.email()" />
       </div>
 
       <div class="form-group">
         <label for="mood">Mood</label>
         <app-mood-selector
           id="mood"
-          [field]="userForm.mood"
+          [field]="feedbackForm.mood"
           (moodSelected)="updateMessage($event)"
         ></app-mood-selector>
-        <app-field-error [fieldState]="userForm.mood()" />
+        <app-field-error [fieldState]="feedbackForm.mood()" />
       </div>
 
       <div class="form-group">
         <label for="message">Message</label>
         <textarea
           id="message"
-          [field]="userForm.message"
+          [field]="feedbackForm.message"
           rows="4"
           placeholder="Enter your message (min 10 characters)"
         ></textarea>
 
-        @if (userForm.message().disabled()) {
+        @if (feedbackForm.message().disabled()) {
           <span class="disabled-message"
             >Unhappy? We blocked the blues to let the good vibes cruise!</span
           >
         }
 
-        <app-field-error [fieldState]="userForm.message()" />
+        <app-field-error [fieldState]="feedbackForm.message()" />
       </div>
 
       <div class="form-group">
         <label for="country">Country</label>
-        <select id="country" [field]="userForm.country">
+        <select id="country" [field]="feedbackForm.country">
           <option value="CH">Switzerland</option>
           <option value="US">United States</option>
         </select>
-        <app-field-error [fieldState]="userForm.country()" />
+        <app-field-error [fieldState]="feedbackForm.country()" />
       </div>
 
       <div class="form-group">
         <label for="zipCode">Zip Code</label>
         <input
           id="zipCode"
-          [field]="userForm.zipCode"
+          [field]="feedbackForm.zipCode"
           placeholder="Enter your zip code"
         />
-        <app-field-error [fieldState]="userForm.zipCode()" />
+        <app-field-error [fieldState]="feedbackForm.zipCode()" />
       </div>
 
       <div class="form-actions">
         <button type="submit">
-          {{ userForm().submitting() ? "Submitting..." : "Submit" }}
+          {{ feedbackForm().submitting() ? "Submitting..." : "Submit" }}
         </button>
 
         <button
           type="button"
           (click)="reset()"
-          [disabled]="userForm().submitting()"
+          [disabled]="feedbackForm().submitting()"
         >
           Reset
         </button>
@@ -85,23 +85,86 @@
         <p>
           <strong>Form Value:</strong>
         </p>
-        <pre>{{ userForm().value() | json }}</pre>
+        <pre>{{ feedbackForm().value() | json }}</pre>
         <p>
           <strong>Form Status:</strong>
           <span
-            [class.valid]="userForm().valid()"
-            [class.invalid]="userForm().invalid()"
+            [class.valid]="feedbackForm().valid()"
+            [class.invalid]="feedbackForm().invalid()"
           >
-            {{ userForm().valid() ? "Valid" : "Invalid" }}
+            {{ feedbackForm().valid() ? "Valid" : "Invalid" }}
           </span>
         </p>
         <p>
           <strong>Dirty/Pristine:</strong>
-          {{ userForm().dirty() ? "Dirty" : "Pristine" }} (Currently Broken)
+          {{ feedbackForm().dirty() ? "Dirty" : "Pristine" }}
+          <a
+            href="https://github.com/angular/angular/pull/64483"
+            target="_blank"
+            >Currently Broken</a
+          >
         </p>
         <br />
-        <pre><strong>Error Summary:</strong>{{ userForm().errorSummary() | json }}
+        <pre><strong>Error Summary:</strong>{{ feedbackForm().errorSummary() | json }}
         </pre>
+
+        <h3>📚 Angular Signal Forms Resources</h3>
+
+        <ul class="resources">
+          <li>
+            📊 Project Status:
+            <a
+              href="https://github.com/orgs/angular/projects/60"
+              target="_blank"
+              rel="noopener"
+            >
+              Angular Signal Forms Project Board
+            </a>
+          </li>
+          <li>
+            🐛 Open Issues:
+            <a
+              href="https://github.com/angular/angular/issues?q=is%3Aissue%20state%3Aopen%20%22signal%20forms%22"
+              target="_blank"
+              rel="noopener"
+            >
+              Signal Forms Issues on GitHub
+            </a>
+          </li>
+          <li>
+            📝 Recent Blog Posts:
+            <ul>
+              <li>
+                <a
+                  href="https://angular-buch.com/blog/2025-10-signal-forms-part2"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Angular Buch - Signal Forms Part 2
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://timdeschryver.dev/blog/2024-10-refactoring-a-form-to-a-signal-form"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Tim Deschryver - Refactoring a Form to a Signal Form
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            🎥 Video Tutorial:
+            <a
+              href="https://www.youtube.com/watch?v=gvL_mTQZIYE"
+              target="_blank"
+              rel="noopener"
+            >
+              CVA and new FormValueControl
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

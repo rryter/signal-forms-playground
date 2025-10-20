@@ -6,6 +6,14 @@ import { FieldState } from "@angular/forms/signals";
   selector: "app-field-error",
   standalone: true,
   imports: [JsonPipe],
+  styles: [
+    `
+      .error {
+        color: red;
+        font-size: 0.875rem;
+      }
+    `,
+  ],
   template: `
     @if (fieldState().touched() && fieldState().errors().length > 0) {
       <div class="error">

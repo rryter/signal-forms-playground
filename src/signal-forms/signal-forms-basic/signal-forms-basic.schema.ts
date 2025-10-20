@@ -8,23 +8,19 @@ import {
   schema,
   validate,
 } from "@angular/forms/signals";
-import { UserForm } from "./signal-forms-basic.model";
+import { FeedbackForm } from "./signal-forms-basic.model";
 
-export const userFormSchema = schema<UserForm>((path) => {
-  // Define validation rules
-  required(path.name);
-  minLength(path.name, 3);
-
+export const feedbackFormSchema = schema<FeedbackForm>((path) => {
   required(path.email);
-  email(path.email);
-
   required(path.message);
-  minLength(path.message, 10);
-
   required(path.country);
   required(path.zipCode);
-
   required(path.mood);
+
+  email(path.email);
+  minLength(path.message, 10);
+
+  // Disable message when a bad mood is selected
   disabled(path.message, (ctx) =>
     ["🤬", "😐", "😠"].includes(ctx.valueOf(path.mood)),
   );

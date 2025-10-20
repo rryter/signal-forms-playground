@@ -1,21 +1,19 @@
 import { JsonPipe } from "@angular/common";
 import { Component, signal, computed } from "@angular/core";
 import { form, Field, submit, schema } from "@angular/forms/signals";
-import { userFormSchema } from "./signal-forms-basic.schema";
-import { UserForm } from "./signal-forms-basic.model";
+import { feedbackFormSchema } from "./signal-forms-basic.schema";
+import { FeedbackForm } from "./signal-forms-basic.model";
 import { MoodSelector } from "../custom/mood-selector.component";
 import { FieldError } from "../custom/field-error.component";
 
 @Component({
   selector: "app-signal-forms-basic",
-  standalone: true,
   imports: [Field, JsonPipe, MoodSelector, FieldError],
   templateUrl: "./signal-forms-basic.component.html",
   styleUrl: "./signal-forms-basic.component.css",
 })
 export class SignalFormsBasicComponent {
-  initialUserFormValue: UserForm = {
-    name: "",
+  initialFeedbackFormValue: FeedbackForm = {
     email: "",
     message: "",
     mood: "",
@@ -23,20 +21,20 @@ export class SignalFormsBasicComponent {
     zipCode: "",
   };
 
-  userFormModel = signal<UserForm>(this.initialUserFormValue);
-  userForm = form(this.userFormModel, userFormSchema);
+  feedbackFormModel = signal<FeedbackForm>(this.initialFeedbackFormValue);
+  feedbackForm = form(this.feedbackFormModel, feedbackFormSchema);
 
   reset() {
     // Reset only resets touched and dirty states
-    this.userForm().reset();
+    this.feedbackForm().reset();
     // So it's necessary to reset the model as well to clear values
-    this.userFormModel.set(this.initialUserFormValue);
+    this.feedbackFormModel.set(this.initialFeedbackFormValue);
   }
 
   updateMessage(mood: string = ""): void {
     if (mood) {
-      this.userFormModel.set({
-        ...this.userFormModel(),
+      this.feedbackFormModel.set({
+        ...this.feedbackFormModel(),
         message: `I am feeling ${mood} today!`,
       });
     }
@@ -46,7 +44,7 @@ export class SignalFormsBasicComponent {
   async onSubmit(e: Event): Promise<void> {
     e.preventDefault();
 
-    await submit(this.userForm, async (form) => {
+    await submit(this.feedbackForm, async (form) => {
       console.log("Form submitted with values:", form().value());
 
       // Simulate API call

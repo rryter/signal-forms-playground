@@ -14,8 +14,8 @@ export class MoodSelector implements FormValueControl<string | null> {
   moods = ["😊", "😐", "😠", "🤬"];
 
   readonly value = model<string | null>(null);
-  disabled = input(false);
-  touched = model(false);
+  readonly disabled = input(false);
+  readonly touched = model(false);
 
   moodSelected = output<string>();
 
@@ -25,6 +25,7 @@ export class MoodSelector implements FormValueControl<string | null> {
     }
     this.touched.set(true);
     this.value.set(mood);
+
     this.moodSelected.emit(mood);
   }
 }
