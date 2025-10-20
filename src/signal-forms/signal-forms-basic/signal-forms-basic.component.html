@@ -1,7 +1,8 @@
 <div class="container">
   <h1>Signal Forms - Basic Example</h1>
   <p class="description">
-    This example demonstrates the basic usage of Angular Signal Forms with simple validation.
+    This example demonstrates the basic usage of Angular Signal Forms with
+    simple validation.
   </p>
 
   <form (submit)="onSubmit()">
@@ -13,15 +14,11 @@
         [field]="userForm.name"
         placeholder="Enter your name (min 3 characters)"
       />
-      @if (nameErrors().touched && nameErrors().hasErrors) {
-        <div class="error">
-          @if (nameErrors().required) {
-            <span>Name is required</span>
-          }
-          @if (nameErrors().minLength) {
-            <span>Name must be at least 3 characters</span>
-          }
-        </div>
+
+      @if (userForm.name().touched() && formErrors().name.hasErrors === true) {
+      <div class="error">
+        {{ formErrors().name | json }}
+      </div>
       }
     </div>
 
@@ -33,15 +30,15 @@
         [field]="userForm.email"
         placeholder="Enter your email"
       />
-      @if (emailErrors().touched && emailErrors().hasErrors) {
-        <div class="error">
-          @if (emailErrors().required) {
+      @if (userForm.email().touched() && userForm.email().errors()) {
+      <div class="error">
+        <!-- @if (userForm.email().errors()?.['required']) {
             <span>Email is required</span>
           }
-          @if (emailErrors().email) {
+          @if (userForm.email().errors()?.['email']) {
             <span>Please enter a valid email</span>
-          }
-        </div>
+          } -->
+      </div>
       }
     </div>
 
@@ -53,15 +50,44 @@
         rows="4"
         placeholder="Enter your message (min 10 characters)"
       ></textarea>
-      @if (messageErrors().touched && messageErrors().hasErrors) {
-        <div class="error">
-          @if (messageErrors().required) {
-            <span>Message is required</span>
-          }
-          @if (messageErrors().minLength) {
-            <span>Message must be at least 10 characters</span>
-          }
-        </div>
+      @if (userForm.message().touched() && userForm.message().errors()) {
+      <div class="error">
+        @if (userForm.message().errors()) {
+        <span>{{ userForm.message().errors() | json }}</span>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="country">Country</label>
+      <input
+        id="country"
+        [field]="userForm.country"
+        placeholder="Enter your country"
+      />
+      @if (userForm.country().touched() && userForm.country().errors()) {
+      <div class="error">
+        @if (userForm.country().errors()) {
+        <span>{{ userForm.country().errors() | json }}</span>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="zipCode">Zip Code</label>
+      <input
+        id="zipCode"
+        [field]="userForm.zipCode"
+        placeholder="Enter your zip code"
+      />
+      @if (showZipcodeErrors() && userForm.zipCode().errors().length > 0) {
+      <div class="error">
+        @if (userForm.zipCode().errors()) {
+        <span>{{ userForm.zipCode().errors() | json }}</span>
+        }
+      </div>
       }
     </div>
 
@@ -70,7 +96,7 @@
         type="submit"
         [disabled]="userForm().invalid() || userForm().submitting()"
       >
-        {{ userForm().submitting() ? 'Submitting...' : 'Submit' }}
+        {{ userForm().submitting() ? "Submitting..." : "Submit" }}
       </button>
 
       <button
@@ -85,12 +111,14 @@
     <div class="form-status">
       <p>
         <strong>Form Status:</strong>
-        <span [class.valid]="userForm().valid()" [class.invalid]="userForm().invalid()">
-          {{ userForm().valid() ? 'Valid' : 'Invalid' }}
+        <span
+          [class.valid]="userForm().valid()"
+          [class.invalid]="userForm().invalid()"
+        >
+          {{ userForm().valid() ? "Valid" : "Invalid" }}
         </span>
       </p>
-      <p><strong>Dirty:</strong> {{ userForm().dirty() }}</p>
-      <p><strong>Touched:</strong> {{ userForm().touched() }}</p>
+      <p><strong>Dirty:</strong> {{ userForm | json }}</p>
     </div>
   </form>
 </div>

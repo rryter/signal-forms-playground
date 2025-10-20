@@ -45,7 +45,9 @@ textarea:focus {
 }
 
 input:invalid,
-textarea:invalid {
+textarea:invalid,
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
   border-color: #e74c3c;
 }
 
