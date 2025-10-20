@@ -4,11 +4,12 @@ import { form, Field, submit, schema } from "@angular/forms/signals";
 import { userFormSchema } from "./signal-forms-basic.schema";
 import { UserForm } from "./signal-forms-basic.model";
 import { MoodSelector } from "../custom/mood-selector.component";
+import { FieldError } from "../custom/field-error.component";
 
 @Component({
   selector: "app-signal-forms-basic",
   standalone: true,
-  imports: [Field, JsonPipe, MoodSelector],
+  imports: [Field, JsonPipe, MoodSelector, FieldError],
   templateUrl: "./signal-forms-basic.component.html",
   styleUrl: "./signal-forms-basic.component.css",
 })

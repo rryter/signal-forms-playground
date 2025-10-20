@@ -16,11 +16,7 @@
           placeholder="Enter your name (min 3 characters)"
         />
 
-        @if (userForm.name().touched() && userForm.name().errors().length > 0) {
-          <div class="error">
-            {{ userForm.name().errors() | json }}
-          </div>
-        }
+        <app-field-error [field]="userForm.name" />
       </div>
 
       <div class="form-group">
@@ -31,13 +27,7 @@
           [field]="userForm.email"
           placeholder="Enter your email"
         />
-        @if (
-          userForm.email().touched() && userForm.email().errors().length > 0
-        ) {
-          <div class="error">
-            {{ userForm.email().errors() | json }}
-          </div>
-        }
+        <app-field-error [field]="userForm.email" />
       </div>
 
       <div class="form-group">
@@ -47,13 +37,7 @@
           [field]="userForm.mood"
           (moodSelected)="updateMessage($event)"
         ></app-mood-selector>
-        @if (userForm.mood().touched() && userForm.mood().errors().length > 0) {
-          <div class="error">
-            @if (userForm.mood().errors()) {
-              <span>{{ userForm.mood().errors() | json }}</span>
-            }
-          </div>
-        }
+        <app-field-error [field]="userForm.mood" />
       </div>
 
       <div class="form-group">
@@ -71,15 +55,7 @@
           >
         }
 
-        @if (
-          userForm.message().touched() && userForm.message().errors().length > 0
-        ) {
-          <div class="error">
-            @if (userForm.message().errors()) {
-              <span>{{ userForm.message().errors() | json }}</span>
-            }
-          </div>
-        }
+        <app-field-error [field]="userForm.message" />
       </div>
 
       <div class="form-group">
@@ -88,15 +64,7 @@
           <option value="CH">Switzerland</option>
           <option value="US">United States</option>
         </select>
-        @if (
-          userForm.country().touched() && userForm.country().errors().length > 0
-        ) {
-          <div class="error">
-            @if (userForm.country().errors()) {
-              <span>{{ userForm.country().errors() | json }}</span>
-            }
-          </div>
-        }
+        <app-field-error [field]="userForm.country" />
       </div>
 
       <div class="form-group">
@@ -106,15 +74,7 @@
           [field]="userForm.zipCode"
           placeholder="Enter your zip code"
         />
-        @if (
-          userForm.zipCode().touched() && userForm.zipCode().errors().length > 0
-        ) {
-          <div class="error">
-            @if (userForm.zipCode().errors()) {
-              <span>{{ userForm.zipCode().errors() | json }}</span>
-            }
-          </div>
-        }
+        <app-field-error [field]="userForm.zipCode" />
       </div>
 
       <div class="form-actions">
