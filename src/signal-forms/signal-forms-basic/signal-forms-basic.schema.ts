@@ -23,6 +23,8 @@ export const userFormSchema = schema<UserForm>((path) => {
   required(path.country);
   required(path.zipCode);
 
+  required(path.mood);
+
   applyWhen(
     path,
     (form) => form.value().country === "US",
@@ -41,6 +43,6 @@ export const userFormSchema = schema<UserForm>((path) => {
         }
         return error;
       });
-    }
+    },
   );
 });

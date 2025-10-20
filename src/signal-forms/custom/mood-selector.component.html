@@ -1,0 +1,9 @@
+@for (mood of moods; track mood.toString()) {
+  <div
+    class="mood-button"
+    [class.selected]="mood === value()"
+    (click)="value.set(mood)"
+  >
+    {{ mood }}
+  </div>
+}

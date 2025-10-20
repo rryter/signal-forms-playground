@@ -5,7 +5,8 @@
     simple validation.
   </p>
 
-  <form (submit)="onSubmit()">
+  <div class="layout-split">
+    <form (submit)="onSubmit($event)" class="form-section">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -35,6 +36,11 @@
           {{ userForm.email().errors() | json }}
         </div>
       }
+    </div>
+
+    <div class="form-group">
+      <label for="mood">Mood</label>
+      <app-mood-selector id="mood" [field]="userForm.mood"></app-mood-selector>
     </div>
 
     <div class="form-group">
@@ -80,7 +86,9 @@
         [field]="userForm.zipCode"
         placeholder="Enter your zip code"
       />
-      @if (showZipcodeErrors() && userForm.zipCode().touched()) {
+      @if (
+        userForm.zipCode().touched() && userForm.zipCode().errors().length > 0
+      ) {
         <div class="error">
           @if (userForm.zipCode().errors()) {
             <span>{{ userForm.zipCode().errors() | json }}</span>
@@ -89,34 +97,44 @@
       }
     </div>
 
-    <div class="form-actions">
-      <button type="submit">
-        {{ userForm().submitting() ? "Submitting..." : "Submit" }}
-      </button>
+      <div class="form-actions">
+        <button type="submit">
+          {{ userForm().submitting() ? "Submitting..." : "Submit" }}
+        </button>
 
-      <button
-        type="button"
-        (click)="userForm().reset()"
-        [disabled]="userForm().submitting()"
-      >
-        Reset
-      </button>
-    </div>
-
-    <div class="form-status">
-      <p>
-        <strong>Form Status:</strong>
-        <span
-          [class.valid]="userForm().valid()"
-          [class.invalid]="userForm().invalid()"
+        <button
+          type="button"
+          (click)="reset()"
+          [disabled]="userForm().submitting()"
         >
-          {{ userForm().valid() ? "Valid" : "Invalid" }}
-        </span>
-      </p>
-      <p>
-        <strong>Dirty:</strong>
-        {{ userForm().dirty() ? "(Dirty)" : "(Pristine)" }} (Broken)
-      </p>
+          Reset
+        </button>
+      </div>
+    </form>
+
+    <div class="status-section">
+      <div class="form-status">
+        <p>
+          <strong>Form Value:</strong>
+        </p>
+        <pre>{{ userForm().value() | json }}</pre>
+        <p>
+          <strong>Form Status:</strong>
+          <span
+            [class.valid]="userForm().valid()"
+            [class.invalid]="userForm().invalid()"
+          >
+            {{ userForm().valid() ? "Valid" : "Invalid" }}
+          </span>
+        </p>
+        <p>
+          <strong>Dirty/Pristine:</strong>
+          {{ userForm().dirty() ? "Dirty" : "Pristine" }} (Currently Broken)
+        </p>
+        <br />
+        <pre><strong>Error Summary:</strong>{{ userForm().errorSummary() | json }}
+        </pre>
+      </div>
     </div>
-  </form>
+  </div>
 </div>
