@@ -1,0 +1,96 @@
+<div class="container">
+  <h1>Signal Forms - Basic Example</h1>
+  <p class="description">
+    This example demonstrates the basic usage of Angular Signal Forms with simple validation.
+  </p>
+
+  <form (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        [field]="userForm.name"
+        placeholder="Enter your name (min 3 characters)"
+      />
+      @if (nameErrors().touched && nameErrors().hasErrors) {
+        <div class="error">
+          @if (nameErrors().required) {
+            <span>Name is required</span>
+          }
+          @if (nameErrors().minLength) {
+            <span>Name must be at least 3 characters</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        [field]="userForm.email"
+        placeholder="Enter your email"
+      />
+      @if (emailErrors().touched && emailErrors().hasErrors) {
+        <div class="error">
+          @if (emailErrors().required) {
+            <span>Email is required</span>
+          }
+          @if (emailErrors().email) {
+            <span>Please enter a valid email</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        [field]="userForm.message"
+        rows="4"
+        placeholder="Enter your message (min 10 characters)"
+      ></textarea>
+      @if (messageErrors().touched && messageErrors().hasErrors) {
+        <div class="error">
+          @if (messageErrors().required) {
+            <span>Message is required</span>
+          }
+          @if (messageErrors().minLength) {
+            <span>Message must be at least 10 characters</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="submit"
+        [disabled]="userForm().invalid() || userForm().submitting()"
+      >
+        {{ userForm().submitting() ? 'Submitting...' : 'Submit' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="userForm().reset()"
+        [disabled]="userForm().submitting()"
+      >
+        Reset
+      </button>
+    </div>
+
+    <div class="form-status">
+      <p>
+        <strong>Form Status:</strong>
+        <span [class.valid]="userForm().valid()" [class.invalid]="userForm().invalid()">
+          {{ userForm().valid() ? 'Valid' : 'Invalid' }}
+        </span>
+      </p>
+      <p><strong>Dirty:</strong> {{ userForm().dirty() }}</p>
+      <p><strong>Touched:</strong> {{ userForm().touched() }}</p>
+    </div>
+  </form>
+</div>
