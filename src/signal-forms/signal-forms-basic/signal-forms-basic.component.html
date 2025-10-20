@@ -8,18 +8,6 @@
   <div class="layout-split">
     <form (submit)="onSubmit($event)" class="form-section">
       <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          [field]="userForm.name"
-          placeholder="Enter your name (min 3 characters)"
-        />
-
-        <app-field-error [field]="userForm.name" />
-      </div>
-
-      <div class="form-group">
         <label for="email">Email</label>
         <input
           id="email"
@@ -27,7 +15,7 @@
           [field]="userForm.email"
           placeholder="Enter your email"
         />
-        <app-field-error [field]="userForm.email" />
+        <app-field-error [fieldState]="userForm.email()" />
       </div>
 
       <div class="form-group">
@@ -37,7 +25,7 @@
           [field]="userForm.mood"
           (moodSelected)="updateMessage($event)"
         ></app-mood-selector>
-        <app-field-error [field]="userForm.mood" />
+        <app-field-error [fieldState]="userForm.mood()" />
       </div>
 
       <div class="form-group">
@@ -55,7 +43,7 @@
           >
         }
 
-        <app-field-error [field]="userForm.message" />
+        <app-field-error [fieldState]="userForm.message()" />
       </div>
 
       <div class="form-group">
@@ -64,7 +52,7 @@
           <option value="CH">Switzerland</option>
           <option value="US">United States</option>
         </select>
-        <app-field-error [field]="userForm.country" />
+        <app-field-error [fieldState]="userForm.country()" />
       </div>
 
       <div class="form-group">
@@ -74,7 +62,7 @@
           [field]="userForm.zipCode"
           placeholder="Enter your zip code"
         />
-        <app-field-error [field]="userForm.zipCode" />
+        <app-field-error [fieldState]="userForm.zipCode()" />
       </div>
 
       <div class="form-actions">
