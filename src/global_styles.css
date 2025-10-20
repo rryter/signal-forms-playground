@@ -4,3 +4,8 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.disabled-message {
+  font-size: 0.875rem;
+  color: #7f8c8d;
+}

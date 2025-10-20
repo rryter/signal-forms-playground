@@ -32,18 +32,30 @@ export class SignalFormsBasicComponent {
     this.userFormModel.set(this.initialUserFormValue);
   }
 
+  updateMessage(mood: string = ""): void {
+    if (mood) {
+      this.userFormModel.set({
+        ...this.userFormModel(),
+        message: `I am feeling ${mood} today!`,
+      });
+    }
+  }
+
   // Submit handler using the submit function
   async onSubmit(e: Event): Promise<void> {
     e.preventDefault();
 
-    await submit(this.userForm, async (value) => {
-      console.log("Form submitted with values:", value);
+    await submit(this.userForm, async (form) => {
+      console.log("Form submitted with values:", form().value());
 
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       console.log("Form submission completed!");
-      alert("Form submitted successfully!\n" + JSON.stringify(value, null, 2));
+      alert(
+        "Form submitted successfully!\n" +
+          JSON.stringify(form().value(), null, 2),
+      );
     });
   }
 }

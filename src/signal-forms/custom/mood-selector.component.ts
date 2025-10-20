@@ -1,5 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import { Component, input, model, signal } from "@angular/core";
+import { Component, input, model, output, signal } from "@angular/core";
 import { form, Field, submit, FormValueControl } from "@angular/forms/signals";
 
 @Component({
@@ -17,11 +17,14 @@ export class MoodSelector implements FormValueControl<string | null> {
   disabled = input(false);
   touched = model(false);
 
+  moodSelected = output<string>();
+
   selectMood(mood: string) {
     if (this.disabled()) {
       return;
     }
-    this.value.set(mood);
     this.touched.set(true);
+    this.value.set(mood);
+    this.moodSelected.emit(mood);
   }
 }

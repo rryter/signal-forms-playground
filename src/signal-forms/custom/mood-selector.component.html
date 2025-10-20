@@ -2,7 +2,13 @@
   <div
     class="mood-button"
     [class.selected]="mood === value()"
+    [attr.tabindex]="disabled() ? -1 : 0"
+    [attr.role]="'button'"
+    [attr.aria-pressed]="mood === value()"
+    [attr.aria-disabled]="disabled()"
     (click)="selectMood(mood)"
+    (keydown.enter)="selectMood(mood)"
+    (keydown.space)="selectMood(mood); $event.preventDefault()"
   >
     {{ mood }}
   </div>

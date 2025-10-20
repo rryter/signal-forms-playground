@@ -45,8 +45,9 @@
         <app-mood-selector
           id="mood"
           [field]="userForm.mood"
+          (moodSelected)="updateMessage($event)"
         ></app-mood-selector>
-        @if (userForm.mood().errors().length > 0) {
+        @if (userForm.mood().touched() && userForm.mood().errors().length > 0) {
           <div class="error">
             @if (userForm.mood().errors()) {
               <span>{{ userForm.mood().errors() | json }}</span>
@@ -65,7 +66,7 @@
         ></textarea>
 
         @if (userForm.message().disabled()) {
-          <span
+          <span class="disabled-message"
             >Unhappy? We blocked the blues to let the good vibes cruise!</span
           >
         }
