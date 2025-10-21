@@ -41,6 +41,12 @@ export class SignalFormsBasicComponent {
     }
   }
 
+  addTopic(): void {
+    this.feedbackForm
+      .topics()
+      .value.update((items: string[]) => [...items, ""]);
+  }
+
   removeTopic(index: number): void {
     {
       const currentTopics = this.feedbackFormModel().topics;
@@ -50,12 +56,6 @@ export class SignalFormsBasicComponent {
         topics: updatedTopics,
       });
     }
-  }
-
-  addTopic(): void {
-    this.feedbackForm
-      .topics()
-      .value.update((items: string[]) => [...items, ""]);
   }
 
   // Submit handler using the submit function
