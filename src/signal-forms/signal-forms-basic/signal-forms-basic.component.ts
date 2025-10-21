@@ -15,6 +15,7 @@ import { FieldError } from "../custom/field-error.component";
 export class SignalFormsBasicComponent {
   initialFeedbackFormValue: FeedbackForm = {
     email: "",
+    bucket: [""],
     message: "",
     mood: "",
     country: "CH",
@@ -38,6 +39,24 @@ export class SignalFormsBasicComponent {
         message: `I am feeling ${mood} today!`,
       });
     }
+  }
+
+  removeBucket(index: number): void {
+    {
+      const currentBuckets = this.feedbackFormModel().bucket;
+      const updatedBuckets = currentBuckets.filter((_, i) => i !== index);
+      this.feedbackFormModel.set({
+        ...this.feedbackFormModel(),
+        bucket: updatedBuckets,
+      });
+    }
+  }
+
+  protected addBucket(): void {
+    this.feedbackForm.bucket;
+    this.feedbackForm
+      .bucket()
+      .value.update((items: string[]) => [...items, ""]);
   }
 
   // Submit handler using the submit function

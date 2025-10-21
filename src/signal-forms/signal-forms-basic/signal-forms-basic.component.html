@@ -6,7 +6,7 @@
   </p>
 
   <div class="layout-split">
-    <form (submit)="onSubmit($event)" class="form-section">
+    <form (submit)="onSubmit($event)" class="form-section" novalidate>
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -17,6 +17,24 @@
         />
         <app-field-error [fieldState]="feedbackForm.email()" />
       </div>
+
+      <legend>
+        Buckets
+        <button type="button" (click)="addBucket()">+</button>
+      </legend>
+
+      @for (bucketField of feedbackForm.bucket; track $index) {
+        <div class="form-group">
+          <label for="bucket">Bucket</label>
+          <input
+            type="bucket"
+            [ariaLabel]="'Bucket ' + $index"
+            [field]="bucketField"
+            placeholder="Enter your bucket"
+          />
+          <button type="button" (click)="removeBucket($index)">-</button>
+        </div>
+      }
 
       <div class="form-group">
         <label for="mood">Mood</label>

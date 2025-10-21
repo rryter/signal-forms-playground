@@ -64,8 +64,8 @@ textarea:focus {
   border-color: #4a90e2;
 }
 
-/* input:invalid,
-textarea:invalid, */
+input:invalid,
+textarea:invalid,
 /* Currently the ng- classes are not added: https://github.com/angular/angular/pull/64489 */
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
