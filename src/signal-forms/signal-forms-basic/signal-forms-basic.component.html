@@ -18,23 +18,40 @@
         <app-field-error [fieldState]="feedbackForm.email()" />
       </div>
 
-      <legend>
-        Buckets
-        <button type="button" (click)="addBucket()">+</button>
-      </legend>
-
-      @for (bucketField of feedbackForm.bucket; track $index) {
-        <div class="form-group">
-          <label for="bucket">Bucket</label>
-          <input
-            type="bucket"
-            [ariaLabel]="'Bucket ' + $index"
-            [field]="bucketField"
-            placeholder="Enter your bucket"
-          />
-          <button type="button" (click)="removeBucket($index)">-</button>
+      <div class="topics-section">
+        <div class="topics-header">
+          <legend>Topics</legend>
+          <button type="button" class="btn-add" (click)="addTopic()" title="Add topic">
+            + Add Topic
+          </button>
         </div>
-      }
+
+        @for (topicField of feedbackForm.topics; track $index) {
+          <div class="topic-item">
+            <div class="topic-input-wrapper">
+              <label [for]="'topic-' + $index">Topic {{ $index + 1 }}</label>
+              <div class="input-with-button">
+                <input
+                  [id]="'topic-' + $index"
+                  type="text"
+                  [ariaLabel]="'Topic ' + ($index + 1)"
+                  [field]="topicField"
+                  placeholder="Enter topic"
+                />
+                <button
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeTopic($index)"
+                  title="Remove topic"
+                  [attr.aria-label]="'Remove topic ' + ($index + 1)"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
 
       <div class="form-group">
         <label for="mood">Mood</label>

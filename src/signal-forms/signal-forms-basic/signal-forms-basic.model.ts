@@ -1,7 +1,7 @@
 export interface FeedbackForm {
   email: string;
   message: string;
-  bucket: string[];
+  topics: string[];
   mood: string;
   country: string;
   zipCode: string;
