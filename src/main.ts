@@ -11,7 +11,7 @@ import { Routes } from "@angular/router";
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet],
   template: `
     <div class="app-container">
       <!-- <header>

@@ -11,36 +11,36 @@ import {
 } from "@angular/forms/signals";
 import { FeedbackForm } from "./signal-forms-basic.model";
 
-export const feedbackFormSchema = schema<FeedbackForm>((path) => {
-  required(path.email);
-  required(path.message);
-  required(path.country);
-  required(path.zipCode);
-  required(path.mood);
+export const feedbackFormSchema = schema<FeedbackForm>((fieldPath) => {
+  required(fieldPath.email);
+  required(fieldPath.message);
+  required(fieldPath.country);
+  required(fieldPath.zipCode);
+  required(fieldPath.mood);
 
-  email(path.email);
-  minLength(path.message, 10);
+  email(fieldPath.email);
+  minLength(fieldPath.message, 10);
 
   // Disable message when a bad mood is selected
-  disabled(path.message, (ctx) =>
-    ["🤬", "😐", "😠"].includes(ctx.valueOf(path.mood)),
+  disabled(fieldPath.message, (ctx) =>
+    ["🤬", "😐", "😠"].includes(ctx.valueOf(fieldPath.mood)),
   );
 
   applyWhen(
-    path,
+    fieldPath,
     (form) => form.value().country === "US",
-    (path) => {
-      validate(path.zipCode, (zipCodeField) => {
+    (fieldPath) => {
+      validate(fieldPath.zipCode, (zipCodeField) => {
         const error =
           zipCodeField.value().length !== 5
             ? customError({
                 kind: "invalidUSZipCode",
-                message: "US Zip Code must be 5 digits long",
+                message: "must be 5 digits long",
               })
             : undefined;
 
         if (error) {
-          console.log(path.zipCode);
+          console.log(fieldPath.zipCode);
         }
         return error;
       });
