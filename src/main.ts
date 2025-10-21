@@ -14,14 +14,14 @@ import { Routes } from "@angular/router";
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <div class="app-container">
-      <header>
+      <!-- <header>
         <h1>Angular Signal Forms Playground</h1>
         <p class="subtitle">Exploring Angular 21 Signal Forms</p>
       </header>
 
       <nav>
         <a routerLink="/basic" routerLinkActive="active">Basic Example</a>
-      </nav>
+      </nav> -->
 
       <main>
         <router-outlet />

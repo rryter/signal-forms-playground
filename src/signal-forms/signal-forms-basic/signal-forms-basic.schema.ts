@@ -3,6 +3,7 @@ import {
   customError,
   disabled,
   email,
+  hidden,
   minLength,
   required,
   schema,
