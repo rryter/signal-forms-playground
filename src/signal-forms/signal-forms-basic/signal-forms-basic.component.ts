@@ -52,7 +52,7 @@ export class SignalFormsBasicComponent {
     }
   }
 
-  protected addTopic(): void {
+  addTopic(): void {
     this.feedbackForm
       .topics()
       .value.update((items: string[]) => [...items, ""]);
